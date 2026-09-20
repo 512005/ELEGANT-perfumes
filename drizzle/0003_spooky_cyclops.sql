@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `audience` enum('men','women') DEFAULT 'men' NOT NULL;

@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1789727173198,
+      "tag": "0000_gigantic_bloodstorm",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1789727290886,
+      "tag": "0001_lethal_doctor_spectrum",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1789729803853,
+      "tag": "0002_strange_whiplash",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1789733314149,
+      "tag": "0003_spooky_cyclops",
+      "breakpoints": true
+    }
+  ]
+}
