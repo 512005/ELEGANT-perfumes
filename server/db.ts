@@ -1,4 +1,4 @@
-import { and, desc, eq, lt } from "drizzle-orm";
+import { and, desc, eq, lt, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import fs from "node:fs";
 import path from "node:path";
@@ -304,22 +304,28 @@ export async function getDb() {
   return _db;
 }
 
+
 async function releaseExpiredReservations(db: ReturnType<typeof drizzle>) {
-  await db
-    .update(products)
-    .set({
-      status: "available",
-      reservationToken: null,
-      reservationExpiresAt: null,
-      updatedAt: new Date(),
-    })
-    .where(
-      and(
-        eq(products.status, "reserved"),
-        lt(products.reservationExpiresAt, new Date())
-      )
-    );
+  try {
+    await db
+      .update(products)
+      .set({
+        status: "available",
+        reservationToken: null,
+        reservationExpiresAt: null,
+        updatedAt: new Date(),
+      })
+      .where(
+        and(
+          eq(products.status, "reserved"),
+          sql`${products.reservationExpiresAt} IS NOT NULL AND ${products.reservationExpiresAt} < ${new Date()}`
+        )
+      );
+  } catch (err) {
+    console.warn("[DB] releaseExpiredReservations failed (non-critical):", err);
+  }
 }
+
 
 export async function upsertUser(user: InsertUser): Promise<void> {
   if (!user.openId) throw new Error("User openId is required for upsert");
