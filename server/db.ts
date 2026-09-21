@@ -662,7 +662,7 @@ export async function createOrder(input: {
         }
         const claimResult = await tx
           .update(products)
-          .set({ reservationToken: null, reservationExpiresAt: null, updatedAt: new Date() })
+          .set({ status: "sold", reservationToken: null, reservationExpiresAt: null, updatedAt: new Date() })
           .where(
             and(
               eq(products.id, item.productId),
@@ -741,6 +741,7 @@ export async function createOrder(input: {
       throw new Error("PRODUCT_UNAVAILABLE");
     }
 
+    product.status = "sold";
     product.reservationToken = null;
     product.reservationExpiresAt = null;
     product.updatedAt = new Date();
