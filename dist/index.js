@@ -1659,7 +1659,9 @@ async function setupVite(app, server) {
   });
 }
 function serveStatic(app) {
-  const distPath = process.env.NODE_ENV === "development" ? path4.resolve(import.meta.dirname, "../..", "dist", "public") : path4.resolve(import.meta.dirname, "public");
+  const rootDistPath = path4.resolve(process.cwd(), "dist", "public");
+  const moduleDistPath = path4.resolve(import.meta.dirname, "public");
+  const distPath = fs3.existsSync(rootDistPath) ? rootDistPath : moduleDistPath;
   if (!fs3.existsSync(distPath)) {
     console.error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`
