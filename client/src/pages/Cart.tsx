@@ -49,7 +49,76 @@ export default function CartPage() {
     );
     const waUrl = `https://wa.me/201103419006?text=${waText}`;
 
-    return <div dir={isArabic ? "rtl" : "ltr"} className="min-h-screen bg-[#f5f6f8] text-[#0c1017]"><StoreHeader /><main className="container flex min-h-[70vh] items-center justify-center py-20"><div className="printable-order w-full max-w-lg rounded-[30px] border border-[#c9d1dc] bg-white/70 p-8 text-center shadow-xl shadow-[#6d4b49]/5 sm:p-12"><div className="mb-7 flex items-center justify-between border-b border-[#d9dee6] pb-5"><div className="text-right"><div className="font-display text-2xl tracking-[0.14em] text-[#0c1017]">Elegant</div><div className="mt-1 text-[9px] uppercase tracking-[0.28em] text-[#7e8b9e]">fine fragrance · order receipt</div></div><a href="https://www.instagram.com/elegant.store.perfume?stkn=MzRlODBiNWFlZA==" target="_blank" rel="noreferrer" className="no-print inline-flex items-center gap-2 rounded-full border border-[#c9d1dc] bg-[#ffffff] px-3 py-2 text-xs text-[#657286] transition hover:border-[#52647b] hover:text-[#52647b]" aria-label="Elegant on Instagram"><Instagram size={16} /><span>@elegant.store.perfume</span></a></div><div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#e4f0e5] text-[#4e885e]"><CheckCircle2 size={42} strokeWidth={1.4} /></div><p className="mt-7 text-xs uppercase tracking-[0.25em] text-[#52647b]">your order is on its way</p><h1 className="mt-3 font-display text-4xl">{bi("طلبك اتسجل بنجاح", "Your order was placed successfully", language)}</h1><p className="mt-5 leading-8 text-[#657286]">{bi(`شكرًا ${form.customerName}. هنتواصل معاك على رقم `, `Thank you ${form.customerName}. We will contact you at `, language)}<span className="font-semibold text-[#0c1017]">{form.phone}</span> {bi("لتأكيد الطلب.", "to confirm your order.", language)}</p><div className="mt-7 rounded-2xl bg-[#e9edf3] p-5 text-sm"><div className="flex justify-between"><span className="text-[#657286]">{bi("رقم الطلب", "Order number", language)}</span><strong>{submittedOrder.orderNumber}</strong></div><div className="mt-3 flex justify-between"><span className="text-[#657286]">{bi("الإجمالي عند الاستلام", "Total on delivery", language)}</span><strong className="text-[#52647b]">{money(submittedOrder.total)}</strong></div></div><div className="mt-4 rounded-2xl border border-[#d9dee6] bg-white/60 p-4 text-right text-sm"><p className="font-semibold">{bi("تفاصيل طلبك", "Order details", language)}</p>{submittedOrder.items.map((item) => <div key={item.id} className="mt-2 flex justify-between gap-3 text-[#657286]"><span>{item.name} · {bi("قطعة واحدة", "One piece", language)}</span><span>{money(item.price)}</span></div>)}<div className="mt-3 border-t border-[#d9dee6] pt-3 text-[#657286]"><span>{bi("عنوان الاستلام", "Delivery address", language)}: </span>{submittedOrder.address}</div></div><div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center"><a href={waUrl} target="_blank" rel="noreferrer" className="no-print inline-flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-5 py-3.5 text-sm font-medium text-white shadow-md shadow-[#25d366]/20 transition hover:bg-[#1ebd59]"><MessageCircle size={16} />{bi("تأكيد فوري عبر واتساب", "Instant WhatsApp confirmation", language)}</a><button type="button" onClick={() => window.print()} className="no-print inline-flex items-center justify-center gap-2 rounded-full border border-[#b9c4d2] bg-[#ffffff] px-5 py-3.5 text-sm text-[#263448] transition hover:border-[#0c1017] hover:bg-white"><Printer size={16} />{bi("طباعة / حفظ PDF", "Print / Save PDF", language)}</button></div><Link href="/" className="no-print mt-4 inline-flex items-center gap-2 rounded-full bg-[#0c1017] px-6 py-3.5 text-sm text-white transition hover:bg-[#1c2736]">{bi("العودة للمجموعة", "Back to collection", language)} {isArabic ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}</Link></div></main></div>;
+    return (
+      <div dir={isArabic ? "rtl" : "ltr"} className="min-h-screen bg-[#f5f6f8] text-[#0c1017]">
+        <StoreHeader />
+        <main className="container flex min-h-[70vh] items-center justify-center py-20">
+          <div className="printable-order w-full max-w-lg rounded-[30px] border border-[#c9d1dc] bg-white/70 p-8 text-center shadow-xl shadow-[#6d4b49]/5 sm:p-12">
+            <div className="mb-7 flex items-center justify-between border-b border-[#d9dee6] pb-5">
+              <div className="text-right">
+                <div className="font-display text-2xl tracking-[0.14em] text-[#0c1017]">Elegant</div>
+                <div className="mt-1 text-[9px] uppercase tracking-[0.28em] text-[#7e8b9e]">fine fragrance · order receipt</div>
+              </div>
+              <a
+                href="https://www.instagram.com/elegant.store.perfume?stkn=MzRlODBiNWFlZA=="
+                target="_blank"
+                rel="noreferrer"
+                className="no-print inline-flex items-center gap-2 rounded-full border border-[#c9d1dc] bg-[#ffffff] px-3 py-2 text-xs text-[#657286] transition hover:border-[#52647b] hover:text-[#52647b]"
+                aria-label="Elegant on Instagram"
+              >
+                <Instagram size={16} />
+                <span>@elegant.store.perfume</span>
+              </a>
+            </div>
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#e4f0e5] text-[#4e885e]">
+              <CheckCircle2 size={42} strokeWidth={1.4} />
+            </div>
+            <p className="mt-7 text-xs uppercase tracking-[0.25em] text-[#52647b]">your order is on its way</p>
+            <h1 className="mt-3 font-display text-4xl">{bi("طلبك اتسجل بنجاح", "Your order was placed successfully", language)}</h1>
+            <p className="mt-5 leading-8 text-[#657286]">
+              {bi(`شكرًا ${form.customerName}. هنتواصل معاك على رقم `, `Thank you ${form.customerName}. We will contact you at `, language)}
+              <span className="font-semibold text-[#0c1017]">{form.phone}</span> {bi("لتأكيد الطلب.", "to confirm your order.", language)}
+            </p>
+            <div className="mt-7 rounded-2xl bg-[#e9edf3] p-5 text-sm">
+              <div className="flex justify-between">
+                <span className="text-[#657286]">{bi("رقم الطلب", "Order number", language)}</span>
+                <strong>{submittedOrder.orderNumber}</strong>
+              </div>
+              <div className="mt-3 flex justify-between">
+                <span className="text-[#657286]">{bi("الإجمالي عند الاستلام", "Total on delivery", language)}</span>
+                <strong className="text-[#52647b]">{money(submittedOrder.total)}</strong>
+              </div>
+            </div>
+            <div className="mt-4 rounded-2xl border border-[#d9dee6] bg-white/60 p-4 text-right text-sm">
+              <p className="font-semibold">{bi("تفاصيل طلبك", "Order details", language)}</p>
+              {submittedOrder.items.map((item) => (
+                <div key={item.id} className="mt-2 flex justify-between gap-3 text-[#657286]">
+                  <span>{item.name} · {bi("قطعة واحدة", "One piece", language)}</span>
+                  <span>{money(item.price)}</span>
+                </div>
+              ))}
+              <div className="mt-3 border-t border-[#d9dee6] pt-3 text-[#657286]">
+                <span>{bi("عنوان الاستلام", "Delivery address", language)}: </span>
+                {submittedOrder.address}
+              </div>
+            </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <a href={waUrl} target="_blank" rel="noreferrer" className="no-print inline-flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-5 py-3.5 text-sm font-medium text-white shadow-md shadow-[#25d366]/20 transition hover:bg-[#1ebd59]">
+                <MessageCircle size={16} />
+                {bi("تأكيد فوري عبر واتساب", "Instant WhatsApp confirmation", language)}
+              </a>
+              <button type="button" onClick={() => window.print()} className="no-print inline-flex items-center justify-center gap-2 rounded-full border border-[#b9c4d2] bg-[#ffffff] px-5 py-3.5 text-sm text-[#263448] transition hover:border-[#0c1017] hover:bg-white">
+                <Printer size={16} />
+                {bi("طباعة / حفظ PDF", "Print / Save PDF", language)}
+              </button>
+            </div>
+            <Link href="/" className="no-print mt-4 inline-flex items-center gap-2 rounded-full bg-[#0c1017] px-6 py-3.5 text-sm text-white transition hover:bg-[#1c2736]">
+              {bi("العودة للمجموعة", "Back to collection", language)} {isArabic ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
   }
 
   if (items.length === 0) {
