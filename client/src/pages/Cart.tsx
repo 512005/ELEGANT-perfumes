@@ -8,7 +8,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useLanguage, bi } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 
-const SHIPPING_FEE = 60;
+const SHIPPING_FEE = 30;
 const money = (value: number) => `${new Intl.NumberFormat("en-US").format(value)} EGP`;
 
 export default function CartPage() {
