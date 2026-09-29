@@ -9,9 +9,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved === "en" ? "en" : "ar";
+      return saved === "ar" ? "ar" : "en";
     } catch {
-      return "ar";
+      return "en";
     }
   });
   useEffect(() => {
